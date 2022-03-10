@@ -8,6 +8,8 @@ import { Employee } from 'types/employee';
 import { AxiosRequestConfig } from 'axios';
 import { SpringPage } from 'types/vendor/spring';
 import { requestBackend } from 'util/requests';
+import { getAuthData } from 'util/storage';
+import { getTokenData } from 'util/token';
 
 const List = () => {
 
@@ -34,15 +36,24 @@ const List = () => {
       });
   }
 
+  const checkAdmin = () => {
+    return getTokenData()?.authorities.includes('ROLE_ADMIN');
+  }
+
   return (
     <>
-      <Link to="/admin/employees/create">
-        <button className="btn btn-primary text-white btn-crud-add">
-          ADICIONAR
-        </button>
-      </Link>
-
-      {page?.content.map((employee) => (
+    {checkAdmin() ? (
+        <Link to="/admin/employees/adicionar/i">
+          <button className="btn btn-primary text-white btn-crud-add">
+            ADICIONAR
+          </button>
+        </Link>
+      ) : (
+        <></>
+      )
+    }
+    
+    {page?.content.map((employee) => (
             <div key={employee.id}>
                 <EmployeeCard employee={employee} />
             </div>
