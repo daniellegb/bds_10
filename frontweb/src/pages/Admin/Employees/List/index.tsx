@@ -10,6 +10,7 @@ import { SpringPage } from 'types/vendor/spring';
 import { requestBackend } from 'util/requests';
 import { getAuthData } from 'util/storage';
 import { getTokenData } from 'util/token';
+import { hasAnyRoles } from 'util/auth';
 
 const List = () => {
 
@@ -36,13 +37,9 @@ const List = () => {
       });
   }
 
-  const checkAdmin = () => {
-    return getTokenData()?.authorities.includes('ROLE_ADMIN');
-  }
-
   return (
     <>
-    {checkAdmin() ? (
+    {hasAnyRoles(['ROLE_ADMIN']) ? (
         <Link to="/admin/employees/create">
           <button className="btn btn-primary text-white btn-crud-add">
             ADICIONAR
