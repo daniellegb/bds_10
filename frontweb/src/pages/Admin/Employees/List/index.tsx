@@ -43,7 +43,7 @@ const List = () => {
   return (
     <>
     {checkAdmin() ? (
-        <Link to="/admin/employees/adicionar/i">
+        <Link to="/admin/employees/create">
           <button className="btn btn-primary text-white btn-crud-add">
             ADICIONAR
           </button>

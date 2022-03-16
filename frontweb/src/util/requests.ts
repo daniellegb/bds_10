@@ -40,6 +40,6 @@ export const requestBackend = (config: AxiosRequestConfig) => {
         Authorization: 'Bearer ' + getAuthData().access_token,
       }
     : config.headers;
-
+  //console.log(config.url);
   return axios({ ...config, baseURL: BASE_URL, headers });
 };
