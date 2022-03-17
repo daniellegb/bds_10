@@ -59,6 +59,8 @@ const Form = () => {
       ...formData,
     };
 
+    console.log(formData.department?.name);
+
     const config: AxiosRequestConfig = {
       method: 'POST',
       url: '/employees',
@@ -168,7 +170,7 @@ const Form = () => {
             >
               CANCELAR
             </button>
-            <button className="btn btn-primary employee-crud-button text-white">
+            <button type="submit" className="btn btn-primary employee-crud-button text-white">
               SALVAR
             </button>
           </div>
