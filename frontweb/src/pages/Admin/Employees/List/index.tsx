@@ -8,8 +8,6 @@ import { Employee } from 'types/employee';
 import { AxiosRequestConfig } from 'axios';
 import { SpringPage } from 'types/vendor/spring';
 import { requestBackend } from 'util/requests';
-import { getAuthData } from 'util/storage';
-import { getTokenData } from 'util/token';
 import { hasAnyRoles } from 'util/auth';
 
 const List = () => {

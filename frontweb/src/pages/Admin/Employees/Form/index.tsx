@@ -57,8 +57,10 @@ const Form = () => {
   const onSubmit = (formData: Employee) => {
     const data = {
       ...formData,
+      department: Object(formData.department)
     };
 
+    console.log("formData.department?.name: ");
     console.log(formData.department?.name);
 
     const config: AxiosRequestConfig = {
@@ -68,6 +70,7 @@ const Form = () => {
       withCredentials: true,
     };
 
+    console.log("config.data: ");
     console.log(config.data);
 
     requestBackend(config)
@@ -144,7 +147,6 @@ const Form = () => {
                       {...field}
                       options={selectDepartments}
                       classNamePrefix="employee-crud-select"
-                      isMulti
                       getOptionLabel={(department: Department) => department.name}
                       getOptionValue={(department: Department) =>
                         String(department.id)
