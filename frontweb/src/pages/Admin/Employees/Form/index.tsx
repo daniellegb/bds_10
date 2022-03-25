@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from 'axios';
 import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Select from 'react-select';
 import { toast } from 'react-toastify';
 import { Department } from 'types/department';
@@ -9,15 +9,7 @@ import { Employee } from 'types/employee';
 import { requestBackend } from 'util/requests';
 import './styles.css';
 
-type UrlParams = {
-  employeeId: string;
-};
-
 const Form = () => {
-
-  const { employeeId } = useParams<UrlParams>();
-
-  const isEditing = employeeId !== 'create';
 
   const history = useHistory();
 
@@ -27,7 +19,6 @@ const Form = () => {
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
     control,
   } = useForm<Employee>();
 
@@ -42,17 +33,6 @@ const Form = () => {
     });
   }, []);
 
-  useEffect(() => {
-    if (isEditing) {
-      requestBackend({ url: '/employees' }).then((response) => {
-        const employee = response.data as Employee;
-
-        setValue('name', employee.name);
-        setValue('email', employee.email);
-        setValue('department', employee.department);
-      });
-    }
-  }, [isEditing, employeeId, setValue]);
 
   const onSubmit = (formData: Employee) => {
     const data = {
